@@ -12,4 +12,7 @@ public interface CarrierRepo extends JpaRepository<Carrier, Integer> {
     List<Carrier> findByRegionsName(String name);
 
     Optional<Carrier> findByFirstName(String name);
+
+    Optional<Carrier> findByIdAndIsActive(Integer integer,Boolean b);
+    List<Carrier> findAllByIsActive(Boolean b);
 }

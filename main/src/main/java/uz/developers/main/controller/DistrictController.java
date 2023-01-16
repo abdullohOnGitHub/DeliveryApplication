@@ -21,17 +21,17 @@ public class DistrictController {
         return districtService.getAllDistrict();
     }
 
-    @GetMapping("/all/region_name")
-    public ResponseDto getAllDistrictsByRegionName(@RequestParam String region_name) throws Exception {
-        return districtService.getDistrictByRegionName(region_name);
+    @GetMapping("/all/region")
+    public ResponseDto getAllDistrictsByRegionName(@RequestParam String name) throws Exception {
+        return districtService.getDistrictByRegionName(name);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseDto addDistrict(@RequestBody @Valid RequestDistrictDto requestDistrictDto) throws Exception {
         return districtService.addDistricts(requestDistrictDto);
     }
 
-    @DeleteMapping
+    @DeleteMapping()
     public ResponseDto deleteDistrict(@RequestParam Integer id) {
         return districtService.deleteDistricts(id);
     }

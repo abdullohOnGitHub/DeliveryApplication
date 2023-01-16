@@ -65,4 +65,12 @@ public class TransacsiyaService {
             return ResponseDto.UserNotFound();
         }
     }
+
+    public ResponseDto deliveryPerRegions(String region_name){
+        return ResponseDto.getSuccess(transacsiyaRepo.countByCarrier_RegionsName(region_name));
+    }
+
+    public ResponseDto scorePerCarrier(Integer score){
+        return ResponseDto.getSuccess(transacsiyaRepo.scorePerCarrier(score));
+    }
 }

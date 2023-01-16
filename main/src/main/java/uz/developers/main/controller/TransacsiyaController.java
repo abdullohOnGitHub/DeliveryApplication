@@ -20,7 +20,7 @@ public class TransacsiyaController {
     }
 
     @PostMapping("/evaluate")
-    public ResponseDto evaluateTransaction(@RequestParam String transaction_uuid, Integer score) {
+    public ResponseDto evaluateTransaction(@RequestParam String transaction_uuid, @RequestParam Integer score) {
         return transacsiyaService.evaluateTransaction(transaction_uuid, score);
     }
 
@@ -29,6 +29,15 @@ public class TransacsiyaController {
         return transacsiyaService.getAll();
     }
 
+    @GetMapping("/scorePerCarrier") // Kiritilingan scoredan katta bo'lgan barcha kuryerlarni va ularni umumiy scoreni qaytaradi
+    public ResponseDto carrierPerScore(@RequestParam Integer score){
+        return transacsiyaService.scorePerCarrier(score);
+    }
+
+    @GetMapping("/deliveryPerRegion") // Kiritilingan regiondagi jami transactsiyalarni countini qaytaradi.
+    public ResponseDto deliveryPerRegion(@RequestParam String region){
+        return transacsiyaService.deliveryPerRegions(region);
+    }
 
     @DeleteMapping
     public ResponseDto deleteTransaction(@RequestParam Integer id) {

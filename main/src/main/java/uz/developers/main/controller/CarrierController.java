@@ -24,9 +24,9 @@ public class CarrierController {
         return new ResponseDto(-1, "Region not valid", null);
     }
 
-    @GetMapping("/regionName")
-    public ResponseDto getCarriersForRegion(@RequestParam String region_name) {
-        return carrierService.getCarriersByRegionName(region_name);
+    @GetMapping("/region")
+    public ResponseDto getCarriersForRegion(@RequestParam String name) {
+        return carrierService.getCarriersByRegionName(name);
     }
 
     @GetMapping("/all")
@@ -40,7 +40,7 @@ public class CarrierController {
     }
 
     @PutMapping("/update")
-    public ResponseDto updateCarrier(@RequestBody @Valid RequestCarrierDto requestCarrierDto) {
+    public ResponseDto updateCarrier(@RequestBody @Valid RequestCarrierDto requestCarrierDto) throws Exception {
         return carrierService.updateCarrier(requestCarrierDto);
     }
 
