@@ -32,7 +32,7 @@ public class RegionController {
         return regionService.getRegionById(id);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseDto updateRegion(@RequestBody RegionDto regionDto) {
         return regionService.updateRegion(regionDto);
     }

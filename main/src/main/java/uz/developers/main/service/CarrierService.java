@@ -31,26 +31,26 @@ public class CarrierService {
     }
 
     public ResponseDto getAllCarrier() {
-        List<Carrier> carrierList = carrierRepo.findAll();
+        List<Carrier> carrierList = carrierRepo.findAllByIsActive(true);
         return ResponseDto.getSuccess(carrierMapper.toResponseDto(carrierList));
     }
 
     public ResponseDto getCarrierById(Integer id) {
-        Optional<Carrier> carrier = carrierRepo.findById(id);
+        Optional<Carrier> carrier = carrierRepo.findByIdAndIsActive(id,true);
         return carrier.map(value -> ResponseDto.getSuccess(carrierMapper.toResponseDto(value))).orElseGet(ResponseDto::UserNotFound);
     }
 
-    public ResponseDto updateCarrier(RequestCarrierDto requestCarrierDto) {
-        Optional<Carrier> carrier = carrierRepo.findById(requestCarrierDto.getId());
-        if (carrier.isPresent()) {
-            return ResponseDto.getSuccess(carrierMapper.toResponseDto(carrierRepo.save(carrier.get())));
-        } else {
+    public ResponseDto updateCarrier(RequestCarrierDto requestCarrierDto) throws Exception {
+        Optional<Carrier> carrier = carrierRepo.findByIdAndIsActive(requestCarrierDto.getId(),true);
+        if (carrier.isPresent()){
+            return ResponseDto.getSuccess(carrierMapper.toResponseDto(carrierRepo.save(carrierMapper.toEntity(requestCarrierDto))));
+        }else{
             return ResponseDto.UserNotFound();
         }
     }
 
     public ResponseDto deleteCarrier(Integer id) {
-        Optional<Carrier> carrier = carrierRepo.findById(id);
+        Optional<Carrier> carrier = carrierRepo.findByIdAndIsActive(id,true);
         if (carrier.isPresent()) {
             carrier.get().setIsActive(false);
             carrierRepo.save(carrier.get());

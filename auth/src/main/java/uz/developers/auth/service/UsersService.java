@@ -47,9 +47,10 @@ public class UsersService {
 
     public ResponseDto updateUser(UsersDto usersDto){
         try {
-            Optional<Users> optionalUsers = usersRepo.findById(usersDto.getId());
+            Optional<Users> optionalUsers = usersRepo.findByIdAndIsActive(usersDto.getId(),true);
+            System.out.println(usersDto);
             if (optionalUsers.isPresent()){
-                return ResponseDto.getSuccess(usersMapper.toDto(usersRepo.save(optionalUsers.get())));
+                return ResponseDto.getSuccess(usersMapper.toDto(usersRepo.save(usersMapper.toEntity(usersDto))));
             }else{
                 return ResponseDto.UserNotFound();
             }
@@ -68,12 +69,12 @@ public class UsersService {
     }
 
     public ResponseDto getById(Integer id){
-        Optional<Users> users = usersRepo.findById(id);
+        Optional<Users> users = usersRepo.findByIdAndIsActive(id,true);
         return users.map(value -> ResponseDto.getSuccess(usersMapper.toDto(value))).orElseGet(ResponseDto::UserNotFound);
     }
 
     public ResponseDto deleteUser(Integer id){
-        Optional<Users> users = usersRepo.findById(id);
+        Optional<Users> users = usersRepo.findByIdAndIsActive(id,true);
         if (users.isPresent()){
             // Agar usha user mavjud bo'lsa uni o'chirmasdan, is_active ni false qilib qo'yamiz.
             users.get().setIsActive(false);
