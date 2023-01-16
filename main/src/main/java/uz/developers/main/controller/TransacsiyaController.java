@@ -39,6 +39,11 @@ public class TransacsiyaController {
         return transacsiyaService.deliveryPerRegions(region);
     }
 
+    @GetMapping("/nTPerProduct") // Barcha transacksiyada mavjud productlarni transacksiyadagi umumiy countini qaytaradi.
+    public ResponseDto deliveryPerRegion(){
+        return transacsiyaService.transactionPerProduct();
+    }
+
     @DeleteMapping
     public ResponseDto deleteTransaction(@RequestParam Integer id) {
         return transacsiyaService.deleteTransacsiya(id);

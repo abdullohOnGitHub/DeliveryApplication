@@ -73,4 +73,8 @@ public class TransacsiyaService {
     public ResponseDto scorePerCarrier(Integer score){
         return ResponseDto.getSuccess(transacsiyaRepo.scorePerCarrier(score));
     }
+
+    public ResponseDto transactionPerProduct(){
+        return ResponseDto.getSuccess(transacsiyaRepo.transactionPerProduct());
+    }
 }

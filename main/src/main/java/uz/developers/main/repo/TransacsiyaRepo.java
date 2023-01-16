@@ -27,4 +27,10 @@ public interface TransacsiyaRepo extends JpaRepository<Transacsiya, Integer> {
     List<Map<Integer,Object>> scorePerCarrier(@Param("kichik_score") Integer min_score);
 
     Integer countByCarrier_RegionsName(String name);
+
+    @Query(value = "select o.product_uuid, count(o.id) as transaction_count from transacsiya join offer o on o.id = transacsiya.offer_id\n" +
+            "group by o.product_uuid order by o.product_uuid",nativeQuery = true)
+    List<Map<String,Integer>> transactionPerProduct();
+
+
 }
