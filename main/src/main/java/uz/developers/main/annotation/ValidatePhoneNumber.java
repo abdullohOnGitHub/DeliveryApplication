@@ -11,6 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = PhoneNumberValidator.class)
 public @interface ValidatePhoneNumber {
+
     public String message() default "Invalid phoneNumber";
 
     Class<?>[] groups() default { };
